@@ -27,7 +27,6 @@
 			            </div>
 			          </div>
 			          <div class="col-md-12 tab-wrap">
-			            
 			            <div class="tab-content p-4" id="v-pills-tabContent">
 
 			              <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-nextgen-tab">

@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.84.0">
-    <title>Sign In Here</title>
+    <title>Sign Up Here</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sign-in/">
 
@@ -47,9 +47,9 @@
   <body class="text-center">
 
 <main class="form-signin">
-  <form action="" method="POST">
+  <form method="POST" action="">
     <img class="mb-4" src="img/logo.jpeg" alt="" height="70px">
-    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+    <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
 
     <div class="form-floating mt-3">
       <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com">
@@ -59,14 +59,21 @@
       <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
       <label for="floatingPassword">Password</label>
     </div>
+    <div class="form-floating mt-2">
+      <input type="fname" name="fname" class="form-control" id="fname" placeholder="first name">
+      <label for="floatingPassword">First Name</label>
+    </div>
+    <div class="form-floating mt-2">
+      <input type="lname" name="lname" class="form-control" id="lname" placeholder="last name">
+      <label for="floatingPassword">Last Name</label>
+    </div>
+    <div class="form-floating mt-2">
+      <input type="number" name="phone" class="form-control" id="phone" placeholder="phone number">
+      <label for="floatingPassword">Phone Number</label>
+    </div>
 
-    <!-- <div class="checkbox mb-3">
-      <label>
-        <input type="checkbox" value="remember-me"> Remember me
-      </label>
-    </div> -->
-    <button type="submit" name="submit" class="w-100 btn btn-lg btn-primary">Sign in</button>
-    <a href="signup.php">Create new Account</a>
+    <button type="submit" name="submit" class="w-100 btn btn-lg btn-primary mt-4" type="submit">Sign Up</button>
+    <a href="job-post.php">Login Here</a>
     <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
   </form>
 </main>
@@ -75,25 +82,25 @@
   </body>
 </html>
 
-<?php
-  include('connection/db.php');
-  if(isset($_POST['submit']))
-  {
-    $email=$_POST['email'];
-    $pass=$_POST['password'];
 
-    $query=mysqli_query($conn,"SELECT * FROM admin_login WHERE admin_email='$email' AND admin_pass='$pass' AND admin_type='2' ");
+<?php
+include('connection/db.php');
+if(isset($_POST['submit']))
+{
+    $email=$_POST['email'];
+    $password=$_POST['password'];
+    $fname=$_POST['fname'];
+    $lname=$_POST['lname'];
+    $phone=$_POST['phone'];
+    $query=mysqli_query($conn,"INSERT INTO job_seeker(email,password,fname,lname,phone) VALUES('$email', '$password', '$fname', '$lname', '$phone') ");
     if($query)
     {
-        if(mysqli_num_rows($query)>0)
-     {
-        $_SESSION['email']=$email;
-       header('location:admin/admin_dashboard.php');
-     }
+        echo "<script>alert('Now you can login!')</script>";
+        header('location:job-post.php');
+    }
     else
     {
-        echo "<script>alert('Email/password is wrong. Please Try again')</script>";
-    }
+        echo "<script>alert('Something went wrong!')</script>";
     }
 }
- ?>
+?>
