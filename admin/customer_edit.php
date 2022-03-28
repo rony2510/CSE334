@@ -1,14 +1,14 @@
 <?php
-//session_start();
+session_start();
 include('connection/db.php');
-// if(isset($_SESSION['email']))
-// {
+if(isset($_SESSION['email']))
+{
 
-// }
-// else
-// {
-//     header('location:admin_login.php');
-// }
+}
+else
+{
+    header('location:admin_login.php');
+}
 $id=$_GET['edit'];
 $query=mysqli_query($conn,"SELECT * FROM admin_login where id='$id'");
 while($row=mysqli_fetch_array($query))
