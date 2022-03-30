@@ -57,14 +57,14 @@
 								              </div>
 							              </div>
 			              			</div>
-			              			<div class="col-md">
+			              			<!-- <div class="col-md">
 			              				<div class="form-group">
 			              					<div class="form-field">
 				              					<div class="icon"><span class="icon-map-marker"></span></div>
 								                <input type="text" class="form-control" placeholder="Location">
 								              </div>
 							              </div>
-			              			</div>
+			              			</div> -->
 			              			<div class="col-md">
 			              				<div class="form-group">
 			              					<div class="form-field">
@@ -104,14 +104,14 @@
 								              </div>
 							              </div>
 			              			</div>
-			              			<div class="col-md">
+			              			<!-- <div class="col-md">
 			              				<div class="form-group">
 			              					<div class="form-field">
 				              					<div class="icon"><span class="icon-map-marker"></span></div>
 								                <input type="text" class="form-control" placeholder="Location">
 								              </div>
 							              </div>
-			              			</div>
+			              			</div> -->
 			              			<div class="col-md">
 			              				<div class="form-group">
 			              					<div class="form-field">

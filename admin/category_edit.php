@@ -1,6 +1,6 @@
 <?php
-$conn=mysqli_connect("localhost", "root", "", "job_portal");
 session_start();
+include('connection/db.php');
 if(isset($_SESSION['email']))
 {
 
@@ -9,8 +9,15 @@ else
 {
     header('location:admin_login.php');
 }
+$id=$_GET['edit'];
+$query=mysqli_query($conn, "SELECT * FROM job_category WHERE id='$id' ");
+while($row=mysqli_fetch_array($query))
+{
+    $category=$row['category'];
+    $description=$row['description'];
+    //$admin_type=$row['admin_type'];
+}
 ?>
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -19,7 +26,7 @@ else
 
   <body>
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="admin_dashboard.php">Company name</a>
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="admin_dashboard.php">Category Name</a>
       <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
       <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
@@ -36,19 +43,19 @@ else
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="admin_dashboard.php" style="text-decoration: none;">Dashboard</a></li>
-            <li class="breadcrumb-item"><a href="create-job.php" style="text-decoration: none;"> All Job List</a></li>
-            <li class="breadcrumb-item active" aria-current="page"><a href="#" style="text-decoration: none;"> Add Job</a></li>
+            <li class="breadcrumb-item"><a href="admin_dashboard.php">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="category.php"> Category</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a href="#"> Update Category</a></li>
            </ol>
           </nav>
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-          <h1 class="h2">Add Jobs</h1>
+          <h1 class="h2">Update Category</h1>
             <div class="btn-toolbar mb-2 mb-md-0">
               <div class="btn-group mr-2">
 
               </div>
-             <a href="add-customer.php"> <button class="btn btn-sm btn-outline-secondary">
-                Add Jobs
+             <a href="add-category.php"> <button class="btn btn-sm btn-outline-secondary">
+                Add Category
               </button>
              </a>
             </div>
@@ -58,59 +65,24 @@ else
            <div id="msg"></div>
             <form method="POST" action="customer-add.php" style="margin:3%; padding:3%;">
                 <div class="form-group">
-                    <label class="w-100">Job Title Name</label>
-                    <input type="text" name="job_title" id="job_title" class="form-control" placeholder="Enter Job Title" required>
+                    <label class="w-100">Category Name</label>
+                    <input type="text" name="edit_category" id="edit_company" value="<?php echo $category; ?>" class="form-control" placeholder="Enter Category Name">
                 </div>
                 <div class="form-group">
                     <label class="w-100">Description</label>
-                    <textarea type="text" name="description" id="description" class="form-control" cols="30" rows="10" placeholder="Enter Job Description" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label class="w-100">Enter Keyword</label>
-                    <input type="text" name="keyword" id="keyword" class="form-control" placeholder="Enter Keyword" required>
-                </div>
-                <div class="form-group">
-                    <label for="">Country</label>
-                    <select name="country" class="countries form-control" id="countryId">
-                          <option value="">Select Country</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="">City</label>
-                    <select name="city" class="states form-control" id="stateId">
-                      <option value="">Select City</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="">Area</label>
-                    <select name="area" class="cities form-control" id="cityId">
-                       <option value="">Select Area</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="">Select Category</label>
-                    <select name="category" class="form-control" id="category">
-                      <?php
-                      $query=mysqli_query($conn,"SELECT * FROM job_category");
-                      while($row=mysqli_fetch_array($query))
-                      {
-                        ?>
-                            <option value="<?php echo $row['id'];?>"> <?php echo $row['category']; ?> </option>
-                        <?php
-                      }
-                      ?>
-                    </select>
+                    <textarea type="text" name="edit_description" id="edit_description" class="form-control" cols="30" rows="10" placeholder="Enter category description"><?php echo $description; ?></textarea>
                 </div>
                 <!-- <div class="form-group">
                     <label class="w-100">Admin Type</label>
-                   <select name="admin_type" id="admin_type" class="form-select">
+                   <select name="edit_admin_type" id="admin_type" value="<?php echo $admin_type; ?>" class="form-select">
                        <option>Select Status</option>
                        <option value="1">Super Admin</option>
                        <option value="2">Customer Admin</option>
                    </select>
                 </div> -->
+                <input type="hidden" name="edit_id" id="id" value="<?php echo $_GET['edit'];  ?>">
                 <div class="form-group mt-3">
-                    <button type="submit" class="btn btn-block btn-success" name="job_save">Save</button>
+                    <button type="submit" class="btn btn-block btn-success" name="update_category">Update</button>
                 </div>
             </form>
         </div>
