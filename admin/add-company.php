@@ -9,7 +9,6 @@ else
 {
     header('location:admin_login.php');
 }
-
 ?>
 <!doctype html>
 <html lang="en">
@@ -64,6 +63,20 @@ else
                 <div class="form-group">
                     <label class="w-100">Description</label>
                     <textarea type="text" name="description" id="description" class="form-control" cols="30" rows="10" placeholder="Enter Company Description" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="w-100">Company Admin</label>
+                    <select name="admin" id="admin" class="form-control">
+                       <?php
+                       $query=mysqli_query($conn,"SELECT * FROM admin_login WHERE admin_type='2' ");
+                          while($row=mysqli_fetch_array($query))
+                          {
+                            ?>
+                              <option value="<?php echo $row['admin_email']; ?>"><?php echo $row['admin_email'];?></option>
+                            <?php
+                          }
+                       ?>
+                    </select>
                 </div>
                 <!-- <div class="form-group">
                     <label class="w-100">Admin Type</label>

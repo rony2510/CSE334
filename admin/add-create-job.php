@@ -88,14 +88,15 @@ else
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="">Select Category</label>
-                    <select name="category" class="form-control" id="category">
+                    <label for="">Category</label>
+                    <select name="category" class="form-control form-select" id="category">
+                    <option value="">Select Category</option>
                       <?php
                       $query=mysqli_query($conn,"SELECT * FROM job_category");
                       while($row=mysqli_fetch_array($query))
                       {
                         ?>
-                            <option value="<?php echo $row['id'];?>"> <?php echo $row['category']; ?> </option>
+                            <option class="" value="<?php echo $row['id'];?>"><?php echo $row['category'];?></option>
                         <?php
                       }
                       ?>

@@ -15,6 +15,7 @@ while($row=mysqli_fetch_array($query))
 {
     $company=$row['company'];
     $description=$row['description'];
+    $admin=$row['admin'];
     //$admin_type=$row['admin_type'];
 }
 ?>
@@ -71,6 +72,20 @@ while($row=mysqli_fetch_array($query))
                 <div class="form-group">
                     <label class="w-100">Description</label>
                     <textarea type="text" name="edit_description" id="edit_description" class="form-control" cols="30" rows="10" placeholder="Enter company description"><?php echo $description; ?></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="w-100">Company Admin</label>
+                    <select name="admin" id="admin" class="form-control">
+                       <?php
+                       $sql=mysqli_query($conn,"SELECT * FROM admin_login WHERE admin_type='2' ");
+                          while($row=mysqli_fetch_array($sql))
+                          {
+                            ?>
+                              <option value="<?php echo $row['admin_email']; ?>"><?php echo $row['admin_email'];?></option>
+                            <?php
+                          }
+                       ?>
+                    </select>
                 </div>
                 <!-- <div class="form-group">
                     <label class="w-100">Admin Type</label>

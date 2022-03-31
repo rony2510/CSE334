@@ -59,6 +59,7 @@ else
                 <th>SL</th>
                 <th>Company Name</th>
                 <th>Description</th>
+                <th>Company Admin</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -72,6 +73,7 @@ else
                 <td><?php echo $row['company_id'];?></td>
                 <td><?php echo $row['company'];?></td>
                 <td><?php echo $row['description'];?></td>
+                <td><?php echo $row['admin'];?></td>
                 <td>
                   <div class="row">
                       <div class="btn-group">
@@ -88,6 +90,7 @@ else
                 <th>SL</th>
                 <th>Company</th>
                 <th>Description</th>
+                <th>Company Admin</th>
                 <th>Action</th>
             </tr>
         </tfoot>

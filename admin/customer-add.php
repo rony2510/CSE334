@@ -53,9 +53,10 @@ if(isset($_POST['company_save']))
 {
    $company=$_POST['company'];
    $description=$_POST['description'];
+   $admin=$_POST['admin'];
    //$admin_type=$_POST['admin_type'];
 
- $query="INSERT INTO company (company, description) VALUES ('$company', '$description')";
+ $query="INSERT INTO company (company, description, admin) VALUES ('$company', '$description', '$admin')";
  $query_run=mysqli_query($conn,$query);
 
 if($query_run)
@@ -75,9 +76,10 @@ if(isset($_POST['update_company']))
     $id=$_POST['edit_id'];
     $company=$_POST['edit_company'];
     $description=$_POST['edit_description'];
+    $admin=$_POST['admin'];
     //$admin_type=$_POST['edit_admin_type'];
 
-$query=mysqli_query($conn,"UPDATE company SET company='$company', description='$description' WHERE company_id='$id' ");
+$query=mysqli_query($conn,"UPDATE company SET company='$company', description='$description', admin='$admin' WHERE company_id='$id' ");
 if($query)
 {
     echo "<script>alert('Record has been updated')</script>";
