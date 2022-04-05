@@ -63,6 +63,8 @@ else
                 <th>Country</th>
                 <th>City</th>
                 <th>Area</th>
+                <th>Category</th>
+                <th>Keyword</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -80,6 +82,8 @@ else
                 <td><?php echo $row['country'];?></td>
                 <td><?php echo $row['city'];?></td>
                 <td><?php echo $row['area'];?></td>
+                <td><?php echo $row['category'];?></td>
+                <td><?php echo $row['keyword'];?></td>
                 <td>
                   <div class="row">
                       <div class="btn-group">
@@ -102,6 +106,8 @@ else
                 <th>Country</th>
                 <th>City</th>
                 <th>Area</th>
+                <th>Category</th>
+                <th>Keyword</th>
                 <th>Action</th>
             </tr>
         </tfoot>

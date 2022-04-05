@@ -39,7 +39,22 @@ include('connection/db.php');
 			              				<div class="form-group">
 				              				<div class="form-field">
 				              					<div class="icon"><span class="icon-briefcase"></span></div>
-								                <input type="text" name="key" id="key" class="form-control" placeholder="eg. Graphic. Web Developer">
+                                <div class="select-wrap">
+						                      <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+						                      <select name="keyword" id="keyword" class="form-control form-select">
+                                      <option value="">Keyword</option>
+                                    <?php
+                                    $query=mysqli_query($conn,"SELECT * FROM all_jobs");
+                                     while($row=mysqli_fetch_array($query))
+                                     {
+                                        ?>
+                                          	<option value="<?php echo $row['job_id']; ?>"><?php echo $row['keyword'];  ?></option>
+                                        <?php
+                                     }
+                                     ?>
+						                      </select>
+						                    </div>
+								                <!-- <input type="text" name="key" id="key" class="form-control" placeholder="eg. Graphic. Web Developer"> -->
 								              </div>
 							              </div>
 			              			</div>
@@ -75,7 +90,7 @@ include('connection/db.php');
 			              			<div class="col-md">
 			              				<div class="form-group">
 			              					<div class="form-field">
-								                <input type="submit" value="Search" class="form-control btn btn-primary">
+								                <input type="submit" name="search" value="Search" class="form-control btn btn-primary">
 								              </div>
 							              </div>
 			              			</div>
@@ -137,19 +152,21 @@ include('connection/db.php');
         </div>
       </div>
     </div>
-    <?php
-      if(isset($_POST['search']))
+    <!-- <?php
+      //if(isset($_POST['search']))
       {
-        $keyword=$_POST['key'];
-        $category=$_POST['category'];
-        $query1=mysqli_query($conn,"SELECT * FROM all_jobs WHERE keyword like '$keyword %' ");
-        while($row=mysqli_fetch_array($query1))
-        {
-          echo $row['job_id'];
-          echo $row['job_title'];
-        }
+        //$keyword=$_POST['keyword'];
+       // $category=$_POST['category'];
+       // $sql=mysqli_query($conn,"SELECT * FROM all_jobs LEFT JOIN company ON all_jobs.customer_email=company.admin WHERE keyword LIKE '%$keyword%'
+                              //  OR category='$category' ");
+        // while($row=mysqli_fetch_array($query1))
+        // {
+        //   echo $row['job_id'];
+        //   echo $row['job_title'];
+        // }
       }
-    ?>
+    ?> -->
+    <div id="id_all_jobs">
     <section class="ftco-section bg-light">
 			<div class="container">
 				<div class="row justify-content-center mb-5 pb-3">
@@ -159,20 +176,30 @@ include('connection/db.php');
           </div>
         </div>
 				<div class="row">
-					<div class="col-md-12 ftco-animate">
+          <?php
+           if(isset($_POST['search']))
+           {
+             $keyword=$_POST['keyword'];
+             $category=$_POST['category'];
+             $sql=mysqli_query($conn,"SELECT * FROM all_jobs LEFT JOIN company ON all_jobs.customer_email=company.admin WHERE keyword LIKE '%$keyword%'
+                                     OR category='$category' ");
+               while($row=mysqli_fetch_array($sql))
+               {
+                ?>
+					    <div class="col-md-12 ftco-animate">
 
-            <div class="job-post-item bg-white p-4 d-block d-md-flex align-items-center">
+                 <div class="job-post-item bg-white p-4 d-block d-md-flex align-items-center">
 
-              <div class="mb-4 mb-md-0 mr-5">
+                 <div class="mb-4 mb-md-0 mr-5">
                 <div class="job-post-item-header d-flex align-items-center">
-                  <h2 class="mr-3 text-black h3">Frontend Development</h2>
+                  <h2 class="mr-3 text-black h3"><?php echo $row['job_title']; ?></h2>
                   <div class="badge-wrap">
-                   <span class="bg-primary text-white badge py-2 px-3">Partime</span>
+                   <span class="bg-primary text-white badge py-2 px-3">Part time</span>
                   </div>
                 </div>
                 <div class="job-post-item-body d-block d-md-flex">
-                  <div class="mr-3"><span class="icon-layers"></span> <a href="#">Facebook, Inc.</a></div>
-                  <div><span class="icon-my_location"></span> <span>Western City, UK</span></div>
+                  <div class="mr-3"><span class="icon-layers"></span> <a href="#"><?php echo $row['company']; ?></a></div>
+                  <div><span class="icon-my_location"></span> <span><?php echo $row['country']; ?>, <?php echo $row['city']; ?>, <?php echo $row['area']; ?></span></div>
                 </div>
               </div>
 
@@ -184,7 +211,10 @@ include('connection/db.php');
               </div>
             </div>
           </div><!-- end -->
-
+         <?php } ?>
+        <?php } ?>
+        </div>
+        <!-- 
           <div class="col-md-12 ftco-animate">
 						<div class="job-post-item bg-white p-4 d-block d-md-flex align-items-center">
 
@@ -209,7 +239,7 @@ include('connection/db.php');
               </div>
 
 						</div>
-          </div> <!-- end -->
+          </div>
           <div class="col-md-12 ftco-animate">
            <div class="job-post-item bg-white p-4 d-block d-md-flex align-items-center">
 
@@ -233,7 +263,7 @@ include('connection/db.php');
                 </a>
               </div>
            </div>
-         </div> <!-- end -->
+         </div> 
          <div class="col-md-12 ftco-animate">
 
            <div class="job-post-item bg-white p-4 d-block d-md-flex align-items-center">
@@ -258,7 +288,7 @@ include('connection/db.php');
                 </a>
               </div>
            </div>
-         </div> <!-- end -->
+         </div> 
          <div class="col-md-12 ftco-animate">
            <div class="job-post-item bg-white p-4 d-block d-md-flex align-items-center">
 
@@ -282,7 +312,7 @@ include('connection/db.php');
                 </a>
               </div>
            </div>
-         </div> <!-- end -->
+         </div> 
          <div class="col-md-12 ftco-animate">
 
             <div class="job-post-item bg-white p-4 d-block d-md-flex align-items-center">
@@ -307,7 +337,7 @@ include('connection/db.php');
                 </a>
               </div>
             </div>
-          </div><!-- end -->
+          </div>
 
           <div class="col-md-12 ftco-animate">
 						<div class="job-post-item bg-white p-4 d-block d-md-flex align-items-center">
@@ -333,7 +363,7 @@ include('connection/db.php');
               </div>
 
 						</div>
-          </div> <!-- end -->
+          </div> 
           <div class="col-md-12 ftco-animate">
            <div class="job-post-item bg-white p-4 d-block d-md-flex align-items-center">
 
@@ -357,7 +387,7 @@ include('connection/db.php');
                 </a>
               </div>
            </div>
-         </div> <!-- end -->
+         </div> 
          <div class="col-md-12 ftco-animate">
 
            <div class="job-post-item bg-white p-4 d-block d-md-flex align-items-center">
@@ -382,7 +412,7 @@ include('connection/db.php');
                 </a>
               </div>
            </div>
-         </div> <!-- end -->
+         </div> 
          <div class="col-md-12 ftco-animate">
            <div class="job-post-item bg-white p-4 d-block d-md-flex align-items-center">
 
@@ -406,7 +436,7 @@ include('connection/db.php');
                 </a>
               </div>
            </div>
-         </div> <!-- end -->
+         </div>  -->
 				</div>
 				<div class="row mt-5">
           <div class="col text-center">
@@ -750,3 +780,13 @@ include('connection/db.php');
 
   </body>
 </html>
+
+<script>
+  $(document).ready(function(){
+    $("#id_all_jobs").hide();
+    $("#search").click(function(e){
+      e.preventDefault();
+      $("#id_all_jobs").show();
+     });
+  });
+</script>
