@@ -90,9 +90,9 @@ include('connection/db.php');
 			              			<div class="col-md">
 			              				<div class="form-group">
 			              					<div class="form-field">
-                                <form method="POST" action="index.php">
+                                <!-- <form method="POST" action="index.php"> -->
                                 <input type="submit" name="search" value="Search" class="form-control btn btn-primary">
-                                </form>
+                                <!-- </form> -->
 								              </div>
 							              </div>
 			              			</div>
@@ -154,17 +154,7 @@ include('connection/db.php');
         </div>
       </div>
     </div>
-    <?php
-      include('connection/db.php');
-           if(isset($_POST['search']))
-           {
-             $keyword=$_POST['keyword'];
-             $category=$_POST['category'];
-             $query=mysqli_query($conn,"SELECT * FROM all_jobs LEFT JOIN company ON all_jobs.customer_email=company.admin WHERE
-             keyword LIKE '%$keyword%' OR category='$category' ");
-           }
-           ?>
-    <div id="id_all_jobs">
+    <!-- <div id="id_all_jobs"> -->
     <section class="ftco-section bg-light">
 			<div class="container">
 				<div class="row justify-content-center mb-5 pb-3">
@@ -175,9 +165,20 @@ include('connection/db.php');
         </div>
 				<div class="row">
              <?php
-               while($row=mysqli_fetch_array($query))
-               {
-                ?>
+              // include('connection/db.php');
+                    if(isset($_POST['search']))
+                    {
+                      $keyword=$_POST['keyword'];
+                      $category=$_POST['category'];
+                     //  $query=mysqli_query($conn,"SELECT * FROM all_jobs LEFT JOIN company ON all_jobs.customer_email=company.admin WHERE
+                     //  keyword LIKE '%$keyword%' OR category='$category' ");
+                     $query="SELECT * FROM all_jobs WHERE keyword='$keyword' OR category='$category' ";
+                     $query_run=mysqli_query($conn, $query);
+                     $check_faculty=mysqli_num_rows($query_run)>0;
+                     if($check_faculty){
+                      while($row=mysqli_fetch_array($query_run))
+                      {
+                     ?>
 					    <div class="col-md-12 ftco-animate">
                 <div class="job-post-item bg-white p-4 d-block d-md-flex align-items-center">
                    <div class="mb-4 mb-md-0 mr-5">
@@ -192,7 +193,6 @@ include('connection/db.php');
                         <div><span class="icon-my_location"></span> <span><?php echo $row['country']; ?>, <?php echo $row['city']; ?>, <?php echo $row['area']; ?></span></div>
                       </div>
                    </div>
-
                    <div class="ml-auto d-flex">
                       <a href="job-single.html" class="btn btn-primary py-2 mr-1">Apply Job</a>
                       <a href="#" class="btn btn-secondary rounded-circle btn-favorite d-flex align-items-center icon">
@@ -201,9 +201,17 @@ include('connection/db.php');
                    </div>
                  </div>
               </div>
-              <?php } ?>
+              <?php
+              }
+            }
+            else
+           {
+               echo "No Record Found";
+           }
+           }
+           ?>
         </div>
-				</div>
+				<!-- </div> -->
 				<div class="row mt-5">
           <div class="col text-center">
             <div class="block-27">
@@ -219,9 +227,9 @@ include('connection/db.php');
             </div>
           </div>
         </div>
-			<!-- </div> -->
+			</div>
 		</section>
-  </div>
+  <!-- </div> -->
 
     <section class="ftco-section services-section bg-light">
       <div class="container">
@@ -548,7 +556,7 @@ include('connection/db.php');
   </body>
 </html>
 
-<script>
+<!-- <script>
   $(document).ready(function(){
     $("#id_all_jobs").hide();
     $("#search").click(function(e){
@@ -556,4 +564,4 @@ include('connection/db.php');
       $("#id_all_jobs").show();
      });
   });
-</script>
+</script> -->
