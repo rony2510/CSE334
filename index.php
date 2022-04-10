@@ -165,18 +165,17 @@ include('connection/db.php');
         </div>
 				<div class="row">
              <?php
-              // include('connection/db.php');
+             $conn=mysqli_connect("localhost","root","","job_portal");
                     if(isset($_POST['search']))
                     {
                       $keyword=$_POST['keyword'];
                       $category=$_POST['category'];
-                     //  $query=mysqli_query($conn,"SELECT * FROM all_jobs LEFT JOIN company ON all_jobs.customer_email=company.admin WHERE
-                     //  keyword LIKE '%$keyword%' OR category='$category' ");
-                     $query="SELECT * FROM all_jobs WHERE keyword='$keyword' OR category='$category' ";
-                     $query_run=mysqli_query($conn, $query);
-                     $check_faculty=mysqli_num_rows($query_run)>0;
-                     if($check_faculty){
-                      while($row=mysqli_fetch_array($query_run))
+                      // $join_query="SELECT * FROM all_jobs LEFT JOIN company ON all_jobs.job_id=company.company_id WHERE
+                      // keyword LIKE '%$keyword%' OR category='$category' ";
+                     $join_query="SELECT * FROM all_jobs WHERE keyword='$keyword' OR category='$category' ";
+                     $join_query_run=mysqli_query($conn,$join_query);
+                     if(mysqli_num_rows($join_query_run)>0){
+                      while($row=mysqli_fetch_array($join_query_run))
                       {
                      ?>
 					    <div class="col-md-12 ftco-animate">
