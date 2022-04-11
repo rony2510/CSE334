@@ -170,9 +170,9 @@ include('connection/db.php');
                     {
                       $keyword=$_POST['keyword'];
                       $category=$_POST['category'];
-                      // $join_query="SELECT * FROM all_jobs LEFT JOIN company ON all_jobs.job_id=company.company_id WHERE
-                      // keyword LIKE '%$keyword%' OR category='$category' ";
-                     $join_query="SELECT * FROM all_jobs WHERE keyword='$keyword' OR category='$category' ";
+                      $join_query="SELECT * FROM all_jobs LEFT JOIN company ON all_jobs.job_id=company.company_id WHERE
+                      keyword LIKE '%$keyword%' OR category='$category' ";
+                   //  $join_query="SELECT * FROM all_jobs WHERE keyword='$keyword' OR category='$category' ";
                      $join_query_run=mysqli_query($conn,$join_query);
                      if(mysqli_num_rows($join_query_run)>0){
                       while($row=mysqli_fetch_array($join_query_run))
@@ -207,6 +207,45 @@ include('connection/db.php');
            {
                echo "No Record Found";
            }
+           }
+           else
+           {
+            $join_query="SELECT * FROM all_jobs LEFT JOIN company ON all_jobs.job_id=company.company_id";
+         //  $join_query="SELECT * FROM all_jobs WHERE keyword='$keyword' OR category='$category' ";
+           $join_query_run=mysqli_query($conn,$join_query);
+           if(mysqli_num_rows($join_query_run)>0){
+            while($row=mysqli_fetch_array($join_query_run))
+              {
+              ?>
+              <div class="col-md-12 ftco-animate">
+                 <div class="job-post-item bg-white p-4 d-block d-md-flex align-items-center">
+                  <div class="mb-4 mb-md-0 mr-5">
+                      <div class="job-post-item-header d-flex align-items-center">
+                        <h2 class="mr-3 text-black h3"><?php echo $row['job_title']; ?></h2>
+                         <div class="badge-wrap">
+                           <span class="bg-primary text-white badge py-2 px-3">Part time</span>
+                         </div>
+                     </div>
+                     <div class="job-post-item-body d-block d-md-flex">
+                       <div class="mr-3"><span class="icon-layers"></span> <a href="#"><?php echo $row['company']; ?></a></div>
+                       <div><span class="icon-my_location"></span> <span><?php echo $row['country']; ?>, <?php echo $row['city']; ?>, <?php echo $row['area']; ?></span></div>
+                    </div>
+                 </div>
+                  <div class="ml-auto d-flex">
+                     <a href="job-single.html" class="btn btn-primary py-2 mr-1">Apply Job</a>
+                     <a href="#" class="btn btn-secondary rounded-circle btn-favorite d-flex align-items-center icon">
+                     <span class="icon-heart"></span>
+                     </a>
+                  </div>
+                 </div>
+               </div>
+             <?php
+             }
+           }
+         else
+             {
+            echo "No Record Found";
+             }
            }
            ?>
         </div>
