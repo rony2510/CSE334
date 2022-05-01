@@ -65,7 +65,7 @@
         <input type="checkbox" value="remember-me"> Remember me
       </label>
     </div> -->
-    <button type="submit" name="submit" class="w-100 btn btn-lg btn-primary">Sign in</button>
+    <input type="submit" name="submit" class="w-100 btn btn-lg btn-primary" placeholder="sign-in">
     <a href="signup.php">Create new Account</a>
     <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
   </form>

@@ -1,4 +1,5 @@
 <?php
+session_start();
 include('connection/db.php');
 ?>
 <!DOCTYPE html>
@@ -172,7 +173,6 @@ include('connection/db.php');
                       $category=$_POST['category'];
                       $join_query="SELECT * FROM all_jobs LEFT JOIN company ON all_jobs.job_id=company.company_id WHERE
                       keyword LIKE '%$keyword%' OR category='$category' ";
-                   //  $join_query="SELECT * FROM all_jobs WHERE keyword='$keyword' OR category='$category' ";
                      $join_query_run=mysqli_query($conn,$join_query);
                      if(mysqli_num_rows($join_query_run)>0){
                       while($row=mysqli_fetch_array($join_query_run))
@@ -193,7 +193,7 @@ include('connection/db.php');
                       </div>
                    </div>
                    <div class="ml-auto d-flex">
-                      <a href="job-single.html" class="btn btn-primary py-2 mr-1">Apply Job</a>
+                      <a href="job-single.php?id=<?php echo $row['job_id']; ?>" class="btn btn-primary py-2 mr-1">Apply Job</a>
                       <a href="#" class="btn btn-secondary rounded-circle btn-favorite d-flex align-items-center icon">
                      	<span class="icon-heart"></span>
                       </a>
@@ -232,7 +232,7 @@ include('connection/db.php');
                     </div>
                  </div>
                   <div class="ml-auto d-flex">
-                     <a href="job-single.html" class="btn btn-primary py-2 mr-1">Apply Job</a>
+                     <a href="job-single.php?id=<?php echo $row['job_id']; ?>" class="btn btn-primary py-2 mr-1">Apply Job</a>
                      <a href="#" class="btn btn-secondary rounded-circle btn-favorite d-flex align-items-center icon">
                      <span class="icon-heart"></span>
                      </a>

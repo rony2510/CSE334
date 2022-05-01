@@ -1,3 +1,6 @@
+<?php  
+session_start();
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -47,25 +50,25 @@
   <body class="text-center">
 
 <main class="form-signin">
-  <form>
+  <form action="" method="POST">
     <img class="mb-4" src="img/logo.jpeg" alt="" height="70px">
     <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
     <div class="form-floating mt-3">
-      <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+      <input type="email" class="form-control" name="email" id="floatingInput" placeholder="name@example.com">
       <label for="floatingInput">Email address</label>
     </div>
     <div class="form-floating mt-2">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+      <input type="password" class="form-control" name="password" id="floatingPassword" placeholder="Password">
       <label for="floatingPassword">Password</label>
     </div>
 
-    <div class="checkbox mb-3">
+    <!-- <div class="checkbox mb-3">
       <label>
         <input type="checkbox" value="remember-me"> Remember me
       </label>
-    </div>
-    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+    </div> -->
+    <input type="submit" class="w-100 btn btn-lg btn-primary" name="submit" placeholder="sign in">
     <a href="signup.php">Create new Account</a>
     <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
   </form>
@@ -74,3 +77,25 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   </body>
 </html>
+<?php
+  include('connection/db.php');
+  if(isset($_POST['submit']))
+  {
+    $email=$_POST['email'];
+    $pass=$_POST['password'];
+
+    $query=mysqli_query($conn,"SELECT * FROM job_seeker WHERE email='$email' AND password='$pass'");
+    if($query)
+    {
+        if(mysqli_num_rows($query)>0)
+    {
+        $_SESSION['email']=$email;
+       header('location:index.php');
+    }
+    else
+    {
+        echo "<script>alert('Email/password is wrong. Please Try again')</script>";
+    }
+    }
+}
+ ?>
