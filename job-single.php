@@ -51,8 +51,10 @@ else
             <h5><?php echo $country; ?>, <?php echo $city; ?>, <?php echo $area; ?> </h5>
             <p><?php echo $description; ?></p>
 
-             <form class="mt-3" action="" method="POST" enctype="multipart/form-data" style="border: 1px solid gray; padding: 2%">
-               <div class="row">
+             <form class="mt-3" action="apply-job.php" method="POST" enctype="multipart/form-data" style="border: 1px solid gray; padding: 2%">
+             <input type="hidden" name="job_seeker" value="<?php echo $_SESSION['email']; ?>" id="job-seeker">
+             <input type="hidden" name="id_job" value="<?php echo $id_job; ?>" id="id_job">
+             <div class="row">
                    <div class="col-sm-6 form-group">
                      <label for="">Enter First Name</label>
                      <input type="text" class="form-control" name="fname" placeholder="First Name...">
