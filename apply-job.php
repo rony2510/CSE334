@@ -15,15 +15,15 @@
 
         move_uploaded_file($_FILES["file"]["tmp_name"],'files/'.$file);
 
-        $query=mysqli_query($conn,"insert into job_apply(fname,lname,dob,file,id_job,job_seeker)values('$fname','$lname','$dob','$file','$id_job','$job_seeker')");
+        $query=mysqli_query($conn,"insert into job_apply(fname,lname,dob,file,id_job,job_seeker) values('$fname','$lname','$dob','$file','$id_job','$job_seeker')");
 
         if ($query) {
+          header('location: apply-job.php');
            // header('location:index.php');
         }else{
             echo '<script>Not</script>';
         }
-
-    }
+     }
 ?>
 
 <!doctype html>
@@ -157,7 +157,12 @@ body {
         $id_job=$_POST['id_job'];
         $job_seeker=$_POST['job_seeker'];
        // $phone=$_POST['phone'];
-
+        $q="SELECT * FROM job_apply WHERE job_seeker='$job_seeker' AND id_job='$id_job' ";
+       $sql=mysqli_query($conn,$q);
+       if(mysqli_num_rows($sql)>0){
+        echo "<h1>Already Applied</h1>";
+       }
+       else{
         move_uploaded_file($_FILES["file"]["tmp_name"],'files/'.$file);
 
         $query=mysqli_query($conn,"insert into job_apply(fname,lname,dob,file,id_job,job_seeker)values('$fname','$lname','$dob','$file','$id_job','$job_seeker')");
@@ -169,12 +174,12 @@ body {
         }else{
             echo '<script>Not</script>';
         }
-
+      }
     }
 ?>
 
     <p class="lead">
-      <a href="job-single.php" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Back</a>
+      <a href="http://localhost/project/CSE334/" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Back</a>
     </p>
   </main>
 
