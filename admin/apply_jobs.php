@@ -46,10 +46,10 @@ else
               <div class="btn-group mr-2">
 
               </div>
-             <a href="add-create-job.php"> <button class="btn btn-sm btn-outline-secondary">
+             <!-- <a href="add-create-job.php"> <button class="btn btn-sm btn-outline-secondary">
                 Apply Jobs
               </button>
-             </a>
+             </a> -->
             </div>
           </div>
 
@@ -82,8 +82,8 @@ else
                 <td>
                   <div class="row">
                       <div class="btn-group">
-                        <a href="job-edit.php?edit=<?php echo $row['job_id']; ?>" class="btn btn-success btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
-                        <a href="job-delete.php?del=<?php echo $row['job_id']; ?>" class="btn btn-warning btn-sm ms-1"><i class="fa-solid fa-trash"></i></a>
+                        <a href="view-applied-jobs.php?id=<?php echo $row['id']; ?>" class="btn btn-success btn-sm"><i class="fa-solid fa-eye"></i></a>
+                        <!-- <a href="job-delete.php?del=<?php echo $row['job_id']; ?>" class="btn btn-warning btn-sm ms-1"><i class="fa-solid fa-trash"></i></a> -->
                         <!-- <a href="#" class="btn btn-success btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
                         <a href="#" class="btn btn-warning btn-sm ms-1"><i class="fa-solid fa-trash"></i></a> -->
                       </div>
